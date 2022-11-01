@@ -7,7 +7,7 @@ BASE_URL = "http://127.0.0.1:5000/"
 
 @app.route('/')
 def index():
-    dr = {'BASE_URL' : BASE_URL}
+    dr = {'BASE_URL': BASE_URL}
     return render_template('home.html')
 
 
