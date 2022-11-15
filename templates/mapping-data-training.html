@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block contents %}
+<div class="container" style="margin-top: 30px;">
+    <h4>Data Training Berita</h4>
+    <hr/>
+    <div class="row">
+        <table class="table table-bordered" id="tblDataBerita" style="font-size: 13px;">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Judul</th>
+                    <th>Isi berita</th>
+                    <th>Kelas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for berita in dTraining %}
+                <tr>
+                    <td>{{ berita.ord }}</td>
+                    <td>{{ berita.judul }}</td>
+                    <td>{{ berita.judul_isi }}</td>
+                    {% if berita.label == 1 %}
+                        <td>Fakta</td>
+                    {% else %}
+                        <td>Hoax</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div style="text-align: center;margin-top: 30px;">
+        <a href="javascript:void(0)" class="btn btn-lg btn-primary" onclick="startTraining()">Mulai training data menggunakan PLSI & DNN</a>
+    </div>
+</div>
+<script>
+    $("#tblDataBerita").dataTable();
+    
+    setTimeout(function(){
+        window.alert("Data training berhasil di mapping ...");    
+    }, 1000);
+
+    function startTraining()
+    {
+
+    }
+    
+</script>
+{% endblock contents %}
+
