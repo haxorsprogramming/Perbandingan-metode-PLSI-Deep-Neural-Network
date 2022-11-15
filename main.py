@@ -1,9 +1,11 @@
 from flask import Flask, redirect, url_for, render_template, request, jsonify, flash
 from werkzeug.utils import secure_filename
 import pandas as pd
+import numpy as np
 import uuid
 import os
 import json
+
 
 app = Flask(__name__)
 
@@ -92,6 +94,19 @@ def prosesAkurasi(token):
         outfile.write(json_object)
     dr = {"status" : "success", "kdProses":token}
     return jsonify(dr)
+
+def forwardPlsi(inputs, weight, bias):
+    w_sum = np.dot(inputs, weight) + bias
+    act = w_sum
+    return act
+
+W = np.array([[2.99999928]])
+b = np.array([1.99999976])
+
+inputs = np.array([[7], [8], [9], [10]])
+
+o_out = forwardPass(inputs, W, b)
+
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
