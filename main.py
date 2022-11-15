@@ -1,5 +1,6 @@
 from flask import Flask, redirect, url_for, render_template, request, jsonify, flash
 from werkzeug.utils import secure_filename
+import mapping_accuracy as mapas
 import pandas as pd
 import numpy as np
 import uuid
@@ -99,16 +100,20 @@ def prosesAkurasi(token):
     inputs = np.array([[7], [8], [9], [10]])
     o_out = forwardDnn(inputs, W, b)
 
-    dr = {"status" : "success", "kdProses":token, "precision":str(o_out)}
+    tPrecission = 0
+
+    tRecall = mapas.sigmoid(9)
+
+    for x in o_out:
+        tPrecission += float(x)
+
+    dr = {"status" : "success", "kdProses":token, "precision":tPrecission, "recall":tRecall}
     return jsonify(dr)
 
 def forwardDnn(inputs, weight, bias):
     w_sum = np.dot(inputs, weight) + bias
     act = w_sum
     return act
-
-
-
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
