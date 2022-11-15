@@ -29,21 +29,27 @@
                 {% endfor %}
             </tbody>
         </table>
+        <input type="hidden" value="{{ token }}" id="txtToken">
     </div>
-    <div style="text-align: center;margin-top: 30px;">
-        <a href="javascript:void(0)" class="btn btn-lg btn-primary" onclick="startTraining()">Mulai training data menggunakan PLSI & DNN</a>
+    <div style="text-align: center;margin-top: 30px;" id="divTombol">
+        <a href="javascript:void(0)" class="btn btn-lg btn-primary" onclick="startTraining()">Cek accuracy menggunakan PLSI & DNN</a>
+    </div>
+    <div style="text-align: center;margin-top: 30px;" id="divLoading">
+        <h5>Memproses ....</h5>
     </div>
 </div>
 <script>
+    $("#divLoading").hide();
     $("#tblDataBerita").dataTable();
-    
-    setTimeout(function(){
-        window.alert("Data training berhasil di mapping ...");    
-    }, 1000);
 
     function startTraining()
     {
-
+        let token = document.querySelector("#txtToken").value;
+        $("#divTombol").hide();
+        $("#divLoading").show();
+        setTimeout(function(){
+            window.location.assign("http://127.0.0.1:5000/proses-akurasi/"+token);
+        }, 4000);
     }
     
 </script>

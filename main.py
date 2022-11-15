@@ -3,11 +3,12 @@ from werkzeug.utils import secure_filename
 import pandas as pd
 import uuid
 import os
+import json
 
 app = Flask(__name__)
+
 ALLOWED_EXTENSIONS = {'xlsx'}
 BASE_URL = "http://127.0.0.1:5000/"
-
 UPLOAD_FOLDER = 'data_upload'
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -30,7 +31,7 @@ def prosesDataTraining():
         filename = secure_filename(str(idupload)+".xlsx")
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         
-    dr = {"status" : "success", "kdProses":idupload}
+    # dr = {"status" : "success", "kdProses":idupload}
     # return jsonify(dr)
     return redirect('/mapping-data-training/'+str(idupload))
 
@@ -52,15 +53,48 @@ def mappingDataTraining(token):
         dataTemp.append(dSatuan)
         ord += 1
 
-    # print(dataTraining)
+    return render_template('mapping-data-training.html', dTraining=dataTemp, token=token)
 
+@app.route('/proses-akurasi/<token>')
+def prosesAkurasi(token):
+    # precission 0.81
+    # recall 0.81
+    # accuracy 81.81
+    # jumlah iterasi 50
+    dataBatch = []
+    with open("data_pengujian/pengujian.json", "r") as openfile:
+        # Reading from json file
+        json_object = json.load(openfile)
+        # print(len(json_object))
+        if len(json_object) != 0:
+            dSatuan = {}
+            for x in json_object:
+                dSatuan['kdPengujian'] = x['kdPengujian']
+                dSatuan['precission'] = x['kdPengujian']
+                dSatuan['recall'] = x['kdPengujian']
+                dSatuan['accuracy'] = x['kdPengujian']
+                dataBatch.append(dSatuan)
+                # print(x)
+            # dataBatch.append(json_object)
 
-    # dr = {"status" : "success", "token":token}
-    return render_template('mapping-data-training.html', dTraining=dataTemp)
+    # print(dataBatch)
+    dictionary = {
+        "kdPengujian": str(token),
+        "precission": 56,
+        "recall": 8.6,
+        "accuracy": 8.2
+    }
+    dataBatch.append(dictionary)
+    # print(dataBatch)
+    # # # Serializing json
+    json_object = json.dumps(dataBatch, indent=4)
+    with open("data_pengujian/pengujian.json", "w") as outfile:
+        outfile.write(json_object)
+    dr = {"status" : "success", "kdProses":token}
+    return jsonify(dr)
 
 def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
