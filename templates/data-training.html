@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block contents %}
+<div class="container" style="margin-top: 30px;text-align: center;">
+    <h4>Data Training</h4>
+    <img class="d-block mx-auto mb-4" src="https://s3.jagoanstorage.com/aditia-storage/asset/ilustrasi/Data-report-amico.png" alt="" width="530">
+    <small></small>
+    <hr/>
+    <div class="row" style="text-align: center;">
+        <strong>Silahkan upload data training</strong>
+        
+        <form method="post" enctype="multipart/form-data" style="margin-top: 30px;" action="{{ BASE_URL }}/proses-data-training">
+            <input type="file" name="txtFile">
+            <input type="submit" class="btn btn-primary" value="Upload">
+          </form>
+    </div>
+
+</div>  
+
+{% endblock contents %}
