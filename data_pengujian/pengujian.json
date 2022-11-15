@@ -1,3 +1,14 @@
 [
-   
+    {
+        "kdPengujian": "9d3fbb37-2a1b-452e-a8f9-e84a62e9bc45",
+        "precission": "9d3fbb37-2a1b-452e-a8f9-e84a62e9bc45",
+        "recall": "9d3fbb37-2a1b-452e-a8f9-e84a62e9bc45",
+        "accuracy": "9d3fbb37-2a1b-452e-a8f9-e84a62e9bc45"
+    },
+    {
+        "kdPengujian": "9d3fbb37-2a1b-452e-a8f9-e84a62e9bc45",
+        "precission": 56,
+        "recall": 8.6,
+        "accuracy": 8.2
+    }
 ]

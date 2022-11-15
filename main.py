@@ -92,20 +92,22 @@ def prosesAkurasi(token):
     json_object = json.dumps(dataBatch, indent=4)
     with open("data_pengujian/pengujian.json", "w") as outfile:
         outfile.write(json_object)
-    dr = {"status" : "success", "kdProses":token}
+
+    # prepare data for report 
+    W = np.array([[2.99999928]])
+    b = np.array([1.99999976])
+    inputs = np.array([[7], [8], [9], [10]])
+    o_out = forwardDnn(inputs, W, b)
+
+    dr = {"status" : "success", "kdProses":token, "precision":str(o_out)}
     return jsonify(dr)
 
-def forwardPlsi(inputs, weight, bias):
+def forwardDnn(inputs, weight, bias):
     w_sum = np.dot(inputs, weight) + bias
     act = w_sum
     return act
 
-W = np.array([[2.99999928]])
-b = np.array([1.99999976])
 
-inputs = np.array([[7], [8], [9], [10]])
-
-o_out = forwardPass(inputs, W, b)
 
 
 def allowed_file(filename):
