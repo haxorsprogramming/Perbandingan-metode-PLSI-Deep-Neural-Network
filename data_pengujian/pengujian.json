@@ -1,62 +1,14 @@
 [
     {
-        "kdPengujian": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "precission": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "recall": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "accuracy": "4cfe3058-1676-4bd1-953f-3b936aa41d65"
+        "kdPengujian": "e921c6d8-a2e8-4d3a-9cdd-0aa1a2345bba",
+        "precission": "e921c6d8-a2e8-4d3a-9cdd-0aa1a2345bba",
+        "recall": "e921c6d8-a2e8-4d3a-9cdd-0aa1a2345bba",
+        "accuracy": "e921c6d8-a2e8-4d3a-9cdd-0aa1a2345bba"
     },
     {
-        "kdPengujian": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "precission": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "recall": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "accuracy": "4cfe3058-1676-4bd1-953f-3b936aa41d65"
-    },
-    {
-        "kdPengujian": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "precission": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "recall": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "accuracy": "4cfe3058-1676-4bd1-953f-3b936aa41d65"
-    },
-    {
-        "kdPengujian": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "precission": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "recall": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "accuracy": "4cfe3058-1676-4bd1-953f-3b936aa41d65"
-    },
-    {
-        "kdPengujian": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "precission": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "recall": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "accuracy": "4cfe3058-1676-4bd1-953f-3b936aa41d65"
-    },
-    {
-        "kdPengujian": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "precission": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "recall": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "accuracy": "4cfe3058-1676-4bd1-953f-3b936aa41d65"
-    },
-    {
-        "kdPengujian": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "precission": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "recall": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "accuracy": "4cfe3058-1676-4bd1-953f-3b936aa41d65"
-    },
-    {
-        "kdPengujian": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "precission": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "recall": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "accuracy": "4cfe3058-1676-4bd1-953f-3b936aa41d65"
-    },
-    {
-        "kdPengujian": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "precission": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "recall": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "accuracy": "4cfe3058-1676-4bd1-953f-3b936aa41d65"
-    },
-    {
-        "kdPengujian": "4cfe3058-1676-4bd1-953f-3b936aa41d65",
-        "precission": 56,
-        "recall": 8.6,
-        "accuracy": 8.2
+        "kdPengujian": "82a7e09a-4dec-4014-8a53-e1c97021da6d",
+        "precission": 0.9999997455999999,
+        "recall": 0.9998766054240137,
+        "accuracy": 92.17970049916805
     }
 ]

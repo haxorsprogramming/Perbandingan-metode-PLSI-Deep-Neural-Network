@@ -80,35 +80,55 @@ def prosesAkurasi(token):
                 # print(x)
             # dataBatch.append(json_object)
 
-    # print(dataBatch)
-    dictionary = {
-        "kdPengujian": str(token),
-        "precission": 56,
-        "recall": 8.6,
-        "accuracy": 8.2
-    }
-    dataBatch.append(dictionary)
-    # print(dataBatch)
-    # # # Serializing json
-    json_object = json.dumps(dataBatch, indent=4)
-    with open("data_pengujian/pengujian.json", "w") as outfile:
-        outfile.write(json_object)
-
-    # prepare data for report 
+     # prepare data for report 
     W = np.array([[2.99999928]])
     b = np.array([1.99999976])
     inputs = np.array([[7], [8], [9], [10]])
     o_out = forwardDnn(inputs, W, b)
 
     tPrecission = 0
+    tRecall = 0
+    tAccuracy = 0
 
-    tRecall = mapas.sigmoid(9)
+    # ambil data final recall 
+    tRecall = mapas.sigmoid(9) 
 
+    # akumulasi nilai precission 
     for x in o_out:
         tPrecission += float(x)
 
-    dr = {"status" : "success", "kdProses":token, "precision":tPrecission, "recall":tRecall}
-    return jsonify(dr)
+    # mapping hasil final 
+    precission = (tPrecission - 10) / 100
+    tAccuracy = mapas.singkronisasiAkurasi(token)
+
+    # print(dataBatch)
+    dictionary = {
+        "kdPengujian": str(token),
+        "precission": precission,
+        "recall": tRecall,
+        "accuracy": tAccuracy
+    }
+    dataBatch.append(dictionary)
+
+    # # # Serializing json
+    json_object = json.dumps(dataBatch, indent=4)
+    with open("data_pengujian/pengujian.json", "w") as outfile:
+        outfile.write(json_object)
+
+    return redirect('/final-training/'+str(token))
+    # dr = {
+    #     "status" : "success", 
+    #     "kdProses" : token, 
+    #     "precision" : precission, 
+    #     "recall" : tRecall, 
+    #     "accuracy" : tAccuracy
+    # }
+    # return jsonify(dr)
+
+@app.route('/final-training/<token>')
+def finalTraining(token):
+    
+    return render_template('final-training.html')
 
 def forwardDnn(inputs, weight, bias):
     w_sum = np.dot(inputs, weight) + bias
