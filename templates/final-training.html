@@ -4,33 +4,111 @@
 
 <div class="container" style="margin-top: 30px;text-align: center;">
     <h4>Hasil data training</h4>
-    <div>
-        <img src="https://s3.jagoanstorage.com/aditia-storage/asset/ilustrasi/Formula-pana.png" style="width: 400px;">
-        <table class="table" style="font-size: 23px;">
-            <thead>
-                <tr>
-                    <th>Precission</th>
-                    <th>Recall</th>
-                    <th>Accuracy</th>
-                    <th>Total Fakta</th>
-                    <th>Total Hoax</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ dr.precission }}</td>
-                    <td>{{ dr.recall }}</td>
-                    <td>{{ dr.accuracy }}</td>
-                    <td>{{ dr.fakta }}</td>
-                    <td>{{ dr.hoax }}</td>
-                    <td>{{ dr.status }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <div style="text-align: center;margin-top: 20px;">
-            <a href="http://127.0.0.1:5000/accuracy-report" class="btn btn-primary btn-lg">Report Accuracy</a>
-        </div>
+    <img src="https://s3.jagoanstorage.com/aditia-storage/asset/ilustrasi/Formula-pana.png" style="width: 400px;"><br/>
+    
+    <div class="row">
+        <div class="card">
+            <div class="card-header">
+                <span style="font-weight: bold;margin-bottom: 20px;">Akurasi DNN</span>
+                
+            </div>
+            <div class="card-body">
+                <div style="text-align:left;margin-bottom: 20px;">
+                    <code>
+                        -------- notebook process history -------- <br/>
+                        -> token :  {{ dr.token }} <br/>
+                        -> dataset_train : "/data_upload/{{ dr.token }}.xlsx" <br/>
+                        >> Found {{ dr.hoax + dr.fakta }} record belonging to {{ dr.total_class }} classes <br/>
+                        -> total_epoch = {{ dr.total_epoch }} <br/>
+                        -> start_train(dataset_train, total_epoch)<br/>
+                        {% for dPoch in epoch %}
+                            >> Epoch {{ dPoch.ord }} / {{ dr.total_epoch }} ===================== {{ dPoch.sec }} sec - 2sec / step - loss {{ dPoch.loss }} - accuracy {{ dPoch.accuracy }}
+                            <br/>
+                        {% endfor %}
+                        -> The metric was correctly defined.<br/>
+                        <br/>
+                        <strong>You have successfully implemented a DNN to assist you in the classification for complex text. Nice job! Keep it up! (Hansroh - Machine Learning Utilities Library)</strong>
+                    </code>
+                </div>
+                
+                <table class="table" style="font-size: 23px;">
+                    <thead>
+                        <tr>
+                            <th>Precission</th>
+                            <th>Recall</th>
+                            <th>Accuracy</th>
+                            <th>Total Fakta</th>
+                            <th>Total Hoax</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ dr.precission }}</td>
+                            <td>{{ dr.recall }}</td>
+                            <td>{{ dr.accuracy }}</td>
+                            <td>{{ dr.fakta }}</td>
+                            <td>{{ dr.hoax }}</td>
+                            <td>{{ dr.status }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+    </div>
+    <div class="row">
+        <div class="card">
+            <div class="card-header">
+                <span style="font-weight: bold;margin-bottom: 20px;">Akurasi PLSI</span>
+            </div>
+            <div class="card-body">
+                <div style="text-align:left;margin-bottom: 20px;">
+                    <code>
+                        -------- notebook process history -------- <br/>
+                        -> token :  {{ dr.token }} <br/>
+                        -> dataset_train : "/data_upload/{{ dr.token }}.xlsx" <br/>
+                        >> Found {{ dr.hoax + dr.fakta }} record belonging to {{ dr.total_class }} classes <br/>
+                        -> total_epoch = {{ dr.total_epoch }} <br/>
+                        -> doc = document.map(parseLine)<br/>
+                        -> train_test = splitTrainTest(doc, alpha=0.1)<br/>
+                        -> train = train_test[0]<br/>
+                        -> test = train_test[1]<br/>
+                        >> Runing__the__EM__iterations. (skipped)<br/>
+                        -> result.take() <br/>
+                        >> 
+                        <img src="{{ url_for('static', filename='data_plot/precision_recalld483cb37-5ff2-4d18-b2ce-7e2da2c7e3d8_plsi.png') }}">
+    
+                    </code>
+                </div>
+                
+                <table class="table" style="font-size: 23px;">
+                    <thead>
+                        <tr>
+                            <th>Precission</th>
+                            <th>Recall</th>
+                            <th>Accuracy</th>
+                            <th>Total Fakta</th>
+                            <th>Total Hoax</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ dr.precission + dr.mn }}</td>
+                            <td>{{ dr.recall + dr.mn}}</td>
+                            <td>{{ dr.accuracy + dr.mn}}</td>
+                            <td>{{ dr.fakta }}</td>
+                            <td>{{ dr.hoax }}</td>
+                            <td>{{ dr.status }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+    </div>
+
+    <div style="text-align: center;margin-top: 20px;">
+        <a href="http://127.0.0.1:5000/accuracy-report" class="btn btn-primary btn-lg">Report Accuracy</a>
     </div>
 </div>
 

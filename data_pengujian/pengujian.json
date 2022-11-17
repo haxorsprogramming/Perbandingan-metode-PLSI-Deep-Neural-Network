@@ -1,14 +1,6 @@
 [
     {
-        "kdPengujian": "018bcd73-ebfa-40ba-a8e8-4cf69eb13a79",
-        "precission": 0.9999997455999999,
-        "recall": 0.9998766054240137,
-        "accuracy": 92.17970049916805,
-        "fakta": 300,
-        "hoax": 300
-    },
-    {
-        "kdPengujian": "018bcd73-ebfa-40ba-a8e8-4cf69eb13a79",
+        "kdPengujian": "34b400b7-2088-4412-9ae3-3ab46367455a",
         "precission": 0.9999997455999999,
         "recall": 0.9998766054240137,
         "accuracy": 92.17970049916805,
@@ -17,6 +9,22 @@
     },
     {
         "kdPengujian": "34b400b7-2088-4412-9ae3-3ab46367455a",
+        "precission": 0.9999997455999999,
+        "recall": 0.9998766054240137,
+        "accuracy": 92.17970049916805,
+        "fakta": 300,
+        "hoax": 300
+    },
+    {
+        "kdPengujian": "34b400b7-2088-4412-9ae3-3ab46367455a",
+        "precission": 0.9999997455999999,
+        "recall": 0.9998766054240137,
+        "accuracy": 92.17970049916805,
+        "fakta": 300,
+        "hoax": 300
+    },
+    {
+        "kdPengujian": "d483cb37-5ff2-4d18-b2ce-7e2da2c7e3d8",
         "precission": 0.9999997455999999,
         "recall": 0.9998766054240137,
         "accuracy": 92.17970049916805,
