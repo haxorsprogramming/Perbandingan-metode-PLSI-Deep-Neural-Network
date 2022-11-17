@@ -19,6 +19,8 @@ def singkronisasiAkurasi(token):
   akurasi = 0
   accFakta = 0
   accHoax = 0
+  tFakta = 0
+  tHoax = 0
 
   for x in dtnp:
     isi = x[2]
@@ -27,10 +29,20 @@ def singkronisasiAkurasi(token):
       accHoax += 1
     if "dipastikan" in isi.lower() or "benar terjadi" in isi.lower() or "fakta" in isi.lower() or "sumber" in isi.lower():
       accFakta += 1
+    if kelas == 1:
+      tFakta += 1
+    else:
+      tHoax += 1
 
     ord += 1
 
   akurasi = accFakta + accHoax
   hasilAkurasi = (akurasi / ord) * 100
 
-  return hasilAkurasi
+  dHasil = {
+    "akurasi" : hasilAkurasi,
+    "fakta" : tFakta,
+    "hoax" : tHoax
+  }
+
+  return dHasil

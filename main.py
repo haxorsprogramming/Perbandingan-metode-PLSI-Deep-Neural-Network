@@ -73,12 +73,12 @@ def prosesAkurasi(token):
             dSatuan = {}
             for x in json_object:
                 dSatuan['kdPengujian'] = x['kdPengujian']
-                dSatuan['precission'] = x['kdPengujian']
-                dSatuan['recall'] = x['kdPengujian']
-                dSatuan['accuracy'] = x['kdPengujian']
+                dSatuan['precission'] = x['precission']
+                dSatuan['recall'] = x['recall']
+                dSatuan['accuracy'] = x['accuracy']
+                dSatuan['fakta'] = x['fakta']
+                dSatuan['hoax'] = x['hoax']
                 dataBatch.append(dSatuan)
-                # print(x)
-            # dataBatch.append(json_object)
 
      # prepare data for report 
     W = np.array([[2.99999928]])
@@ -99,14 +99,16 @@ def prosesAkurasi(token):
 
     # mapping hasil final 
     precission = (tPrecission - 10) / 100
-    tAccuracy = mapas.singkronisasiAkurasi(token)
+    tWrapData = mapas.singkronisasiAkurasi(token)
 
     # print(dataBatch)
     dictionary = {
-        "kdPengujian": str(token),
-        "precission": precission,
-        "recall": tRecall,
-        "accuracy": tAccuracy
+        "kdPengujian" : str(token),
+        "precission" : precission,
+        "recall" : tRecall,
+        "accuracy" : tWrapData['akurasi'],
+        "fakta" : tWrapData['fakta'],
+        "hoax" : tWrapData['hoax']
     }
     dataBatch.append(dictionary)
 
@@ -116,19 +118,39 @@ def prosesAkurasi(token):
         outfile.write(json_object)
 
     return redirect('/final-training/'+str(token))
-    # dr = {
-    #     "status" : "success", 
-    #     "kdProses" : token, 
-    #     "precision" : precission, 
-    #     "recall" : tRecall, 
-    #     "accuracy" : tAccuracy
-    # }
-    # return jsonify(dr)
 
 @app.route('/final-training/<token>')
 def finalTraining(token):
-    
-    return render_template('final-training.html')
+    status = False
+    precission = 0
+    recall = 0
+    accuracy = 0
+    fakta = 0
+    hoax = 0
+    with open("data_pengujian/pengujian.json", "r") as openfile:
+        # Reading from json file
+        json_object = json.load(openfile)
+        # print(len(json_object))
+        if len(json_object) != 0:
+            for x in json_object:
+                kdPengujian = x['kdPengujian']
+                if token == kdPengujian:
+                    status = True
+                    precission = x['precission']
+                    recall = x['recall']
+                    accuracy = x['accuracy']
+                    fakta = x['fakta']
+                    hoax = x['hoax']
+
+    dSend = {
+        'precission' : precission,
+        'recall' : recall,
+        'accuracy' : accuracy,
+        'fakta' : fakta,
+        'hoax' : hoax,
+        'status' : status
+    }
+    return render_template('final-training.html', dr=dSend)
 
 def forwardDnn(inputs, weight, bias):
     w_sum = np.dot(inputs, weight) + bias
