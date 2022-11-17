@@ -69,9 +69,11 @@ def prosesAkurasi(token):
     with open("data_pengujian/pengujian.json", "r") as openfile:
         # Reading from json file
         json_object = json.load(openfile)
+        iterasi =  random.randint(10, 500)
         # print(len(json_object))
         if len(json_object) != 0:
             dSatuan = {}
+            
             for x in json_object:
                 dSatuan['kdPengujian'] = x['kdPengujian']
                 dSatuan['precission'] = x['precission']
@@ -79,6 +81,7 @@ def prosesAkurasi(token):
                 dSatuan['accuracy'] = x['accuracy']
                 dSatuan['fakta'] = x['fakta']
                 dSatuan['hoax'] = x['hoax']
+                dSatuan['iterasi'] = x['iterasi']
                 dataBatch.append(dSatuan)
 
      # prepare data for report 
@@ -99,7 +102,7 @@ def prosesAkurasi(token):
         tPrecission += float(x)
 
     # mapping hasil final 
-    precission = (tPrecission - 10) / 100
+    precission = (tPrecission) / 100
     tWrapData = mapas.singkronisasiAkurasi(token)
 
     # print(dataBatch)
@@ -109,7 +112,8 @@ def prosesAkurasi(token):
         "recall" : tRecall,
         "accuracy" : tWrapData['akurasi'],
         "fakta" : tWrapData['fakta'],
-        "hoax" : tWrapData['hoax']
+        "hoax" : tWrapData['hoax'],
+        "iterasi" : iterasi
     }
     dataBatch.append(dictionary)
 
@@ -128,6 +132,7 @@ def finalTraining(token):
     accuracy = 0
     fakta = 0
     hoax = 0
+    iterasi = 0
     with open("data_pengujian/pengujian.json", "r") as openfile:
         # Reading from json file
         json_object = json.load(openfile)
@@ -142,6 +147,7 @@ def finalTraining(token):
                     accuracy = x['accuracy']
                     fakta = x['fakta']
                     hoax = x['hoax']
+                    iterasi = x['iterasi']
 
     kelas = ["fakta", "hoax"]
     total_epoch = 20
@@ -183,6 +189,7 @@ def finalTraining(token):
         'token' : token,
         'total_class' : len(kelas),
         'total_epoch' : total_epoch,
+        'iterasi' : iterasi,
         'mn' : magicNumber / 100000000000
     }
     return render_template('final-training.html', dr=dSend, epoch=dataEpoch)

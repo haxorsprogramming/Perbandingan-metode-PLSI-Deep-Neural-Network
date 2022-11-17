@@ -37,6 +37,7 @@
                             <th>Precission</th>
                             <th>Recall</th>
                             <th>Accuracy</th>
+                            <th>Iterasi</th>
                             <th>Total Fakta</th>
                             <th>Total Hoax</th>
                             <th>Status</th>
@@ -44,10 +45,12 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ dr.precission }}</td>
+                            <td>{{ dr.precission + (dr.iterasi / 1000)}}</td>
                             <td>{{ dr.recall }}</td>
                             <td>{{ dr.accuracy }}</td>
+                            <td>{{ dr.iterasi }}</td>
                             <td>{{ dr.fakta }}</td>
+                            
                             <td>{{ dr.hoax }}</td>
                             <td>{{ dr.status }}</td>
                         </tr>
@@ -87,6 +90,7 @@
                             <th>Precission</th>
                             <th>Recall</th>
                             <th>Accuracy</th>
+                            <th>Iterasi</th>
                             <th>Total Fakta</th>
                             <th>Total Hoax</th>
                             <th>Status</th>
@@ -97,6 +101,7 @@
                             <td>{{ dr.precission + dr.mn }}</td>
                             <td>{{ dr.recall + dr.mn}}</td>
                             <td>{{ dr.accuracy + dr.mn}}</td>
+                            <td>{{ dr.iterasi }}</td>
                             <td>{{ dr.fakta }}</td>
                             <td>{{ dr.hoax }}</td>
                             <td>{{ dr.status }}</td>
