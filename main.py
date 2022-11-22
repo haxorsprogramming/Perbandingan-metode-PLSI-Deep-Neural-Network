@@ -126,6 +126,7 @@ def prosesAkurasi(token):
 
 @app.route('/final-training/<token>')
 def finalTraining(token):
+    
     status = False
     precission = 0
     recall = 0
@@ -177,8 +178,8 @@ def finalTraining(token):
 
     createPlot(token, "plsi", tempAccuracy)
 
-    magicNumber = random.randint(30, 40)
-
+    
+    magicNumber = recall - accuracy
     dSend = {
         'precission' : precission,
         'recall' : tempAccuracy / 20 ,
@@ -196,7 +197,26 @@ def finalTraining(token):
 
 @app.route('/accuracy-report')
 def accuracyReport():
-    return render_template('accuracy-report.html')
+    dataReport = []
+    with open("data_pengujian/pengujian.json", "r") as openfile:
+        # Reading from json file
+        json_object = json.load(openfile)
+        ord = 1
+        for x in json_object:
+            dSatuan = {}
+            dSatuan['kdPengujian'] = x['kdPengujian']
+            dSatuan['precission'] = x['precission']
+            dSatuan['recall'] = x['recall']
+            dSatuan['accuracy'] = x['accuracy']
+            dSatuan['fakta'] = x['fakta']
+            dSatuan['hoax'] = x['hoax']
+            dSatuan['iterasi'] = x['iterasi']
+            dSatuan['ord'] = ord
+            dSatuan['mn'] = (x['recall'] - x['accuracy']) / 100000000000
+            ord += 1
+            dataReport.append(dSatuan)
+
+    return render_template('accuracy-report.html', dReport=dataReport)
 
 def forwardDnn(inputs, weight, bias):
     w_sum = np.dot(inputs, weight) + bias

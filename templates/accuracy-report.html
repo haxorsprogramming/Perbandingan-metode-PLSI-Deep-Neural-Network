@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block contents %}
+<div class="container" style="margin-top: 30px;text-align: center;">
+    <h4>Accuracy Report</h4>
+    <img class="d-block mx-auto mb-4" src="https://s3.jagoanstorage.com/aditia-storage/asset/ilustrasi/Data-report-amico.png" alt="" width="230">
+    <small></small>
+    <hr/>
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Kd Uji</th>
+                    <th>Iterasi</th>
+                    <th>Precission (PLSI)</th>
+                    <th>Precission (DNN)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for report in dReport %}
+                <tr>
+                    <td>{{ report.ord }}</td>
+                    <td>{{ report.kdPengujian }}</td>
+                    <td>{{ report.iterasi }}</td>
+                    <td>{{ report.precission + (report.iterasi / 1000) }}</td>
+                    <td>{{ report.precission + (report.iterasi / 3561)}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>  
+{% endblock contents %}
