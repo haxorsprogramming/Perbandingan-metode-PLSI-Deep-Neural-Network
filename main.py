@@ -218,6 +218,10 @@ def accuracyReport():
 
     return render_template('accuracy-report.html', dReport=dataReport)
 
+@app.route('/cek-berita')
+def cekBerita():
+    return render_template('cek-berita.html')
+
 def forwardDnn(inputs, weight, bias):
     w_sum = np.dot(inputs, weight) + bias
     act = w_sum

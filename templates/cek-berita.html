@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block contents %}
+<div class="container" style="margin-top: 20px;">
+	<h1>Uji coba berita</h1>
+	<small>Silahkan masukkan berita untuk menguji apakah termasuk ke dalam komentar fakta atau hoax</small>
+	<div class="well">
+		<div class="form-group pmd-textfield pmd-textfield-floating-label-completed">
+			<input type="text" class="form-control" id="txtKata" placeholder="Masukkan kalimat komentar disini"><span class="pmd-textfield-focused"></span>
+			<br>
+			<a id="analyzes" href="javascript:void(0)" onclick="prosesAnalisa()" name="btn" class="btn btn-primary pmd-ripple-effect">Proses</a>
+		</div>
+	</div>
+
+	<div id="hasil" style="text-align: center;">
+		<img src="#" id="txtGambar" style="width: 400px;"><br/>
+        Berita diprediksi<br/>
+        <h3 id="txtCapHasil"></h3>
+	</div>
+</div>
+<script>
+$("#hasil").hide();
+function prosesAnalisa()
+{
+    let kata = document.querySelector("#txtKata").value;
+    let urlProses = "https://api-ratna.pixelkreatif.id/api.php?q=";
+    let urlFinal = urlProses + kata;
+    console.log("proses berjalan ...");
+    $.get(urlFinal, function(data){
+        let obj = JSON.parse(data);
+        // 0 -> hoax, 1 -> fakta
+        let hasil = obj.sentiment;
+        $("#hasil").show();
+        if(hasil === "1"){
+            document.getElementById("txtGambar").src = "https://nos.jkt-1.neo.id/aditiastorage/asset/ilustrasi/Honesty-rafiki.png";
+            document.querySelector("#txtCapHasil").innerHTML = "FAKTA";
+        }else{
+            document.querySelector("#txtCapHasil").innerHTML = "HOAX";
+            document.getElementById("txtGambar").src = "https://nos.jkt-1.neo.id/aditiastorage/asset/ilustrasi/Feeling_angry-pana.png";
+        }
+    });
+}
+
+</script>
+{% endblock contents %}
