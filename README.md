@@ -1,5 +1,5 @@
 <p align="center">
-<img width="500" src="https://s3.jagoanstorage.com/aditia-storage/asset/ilustrasi/Copyright-pana.png">
+<img width="500" src="https://nos.jkt-1.neo.id/aditiastorage/asset/ilustrasi/Copyright-pana.png">
 </p>
 
 <div align="center">
